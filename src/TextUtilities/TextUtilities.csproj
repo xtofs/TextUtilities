@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>Xtofs.TextUtilities</RootNamespace>
-        <Version>0.1.0-alpha.1</Version>
+        <Version>0.1.0-alpha.2</Version>
         <Description>Utility functions for working with text.</Description>
         <PackageId>TextUtilities</PackageId>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
