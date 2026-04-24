@@ -1,6 +1,9 @@
 name: Publish Package
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
 
 permissions:
@@ -33,6 +36,22 @@ jobs:
 
       - name: Pack
         run: dotnet pack src/TextUtilities/TextUtilities.csproj --configuration Release --no-build --output artifacts/packages
+
+      - name: Validate tag matches package version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          package_version=$(grep -oPm1 '(?<=<Version>)[^<]+' src/TextUtilities/TextUtilities.csproj)
+          tag_version="${GITHUB_REF_NAME#v}"
+
+          if [[ -z "$package_version" ]]; then
+            echo "Could not determine package version from src/TextUtilities/TextUtilities.csproj"
+            exit 1
+          fi
+
+          if [[ "$package_version" != "$tag_version" ]]; then
+            echo "Tag version ($tag_version) does not match package version ($package_version)."
+            exit 1
+          fi
 
       - name: Publish to NuGet.org
         run: dotnet nuget push "artifacts/packages/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
