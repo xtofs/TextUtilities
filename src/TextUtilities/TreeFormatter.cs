@@ -1,4 +1,4 @@
-namespace TextUtilities;
+namespace Xtofs.TextUtilities;
 
 
 

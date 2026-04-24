@@ -1,4 +1,4 @@
-namespace TextUtilities;
+namespace Xtofs.TextUtilities;
 
 /// <summary>
 /// Defines the visual style for rendering tree structures using ASCII or Unicode characters.

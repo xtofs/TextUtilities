@@ -1,3 +1,4 @@
+using Xtofs.TextUtilities;
 namespace TextUtilities.Tests;
 
 public class StringExtensionsTests

@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Xtofs.TextUtilities</RootNamespace>
         <Version>0.1.0-alpha.1</Version>
         <Description>Utility functions for working with text.</Description>
         <PackageId>TextUtilities</PackageId>

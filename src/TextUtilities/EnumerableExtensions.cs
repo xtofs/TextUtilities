@@ -1,6 +1,6 @@
 using System;
 
-namespace TextUtilities;
+namespace Xtofs.TextUtilities;
 
 
 internal static class EnumerableExtensions

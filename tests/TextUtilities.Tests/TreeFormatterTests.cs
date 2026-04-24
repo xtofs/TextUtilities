@@ -1,3 +1,5 @@
+using Xtofs.TextUtilities;
+
 using System.Diagnostics.CodeAnalysis;
 
 namespace TextUtilities.Tests;
