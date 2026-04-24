@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>0.1.0-alpha.1</Version>
+        <Description>Utility functions for working with text.</Description>
+        <PackageId>TextUtilities</PackageId>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <IsPackable>true</IsPackable>
+        <LangVersion>14.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="README.md"
+              Pack="true"
+              PackagePath="\" />
+    </ItemGroup>
+</Project>
