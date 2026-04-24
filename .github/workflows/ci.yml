@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-test-pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore TextUtilities.slnx
+
+      - name: Build
+        run: dotnet build TextUtilities.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test TextUtilities.slnx --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/TextUtilities/TextUtilities.csproj --configuration Release --no-build --output artifacts/packages
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: artifacts/packages/*.nupkg

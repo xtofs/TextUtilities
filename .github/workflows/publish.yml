@@ -1,0 +1,38 @@
+name: Publish Package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore TextUtilities.slnx
+
+      - name: Build
+        run: dotnet build TextUtilities.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test TextUtilities.slnx --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/TextUtilities/TextUtilities.csproj --configuration Release --no-build --output artifacts/packages
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push "artifacts/packages/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
