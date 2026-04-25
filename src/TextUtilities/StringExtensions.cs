@@ -28,6 +28,23 @@ public static class StringExtensions
         var ellipsis = ellipsisStyle == EllipsisStyle.Unicode ? "…" : "...";
         return value[..(maxLength - ellipsis.Length)] + ellipsis;
     }
+
+    /// <summary>
+    /// Replaces control characters (ASCII &lt;= 32) in the string with their Unicode Control Pictures equivalents.
+    /// </summary>
+    /// <param name="value">The string in which to replace control characters.</param>
+    /// <returns>A new string with control characters replaced, or the original string if it is null or empty.</returns>
+    public static string ReplaceControlCharacters(this string value)
+    {
+        if (string.IsNullOrEmpty(value)) { return value; }
+        var result = new char[value.Length];
+        for (int i = 0; i < value.Length; i++)
+        {
+            var ch = value[i];
+            result[i] = ch <= 32 ? (char)(ch + 0x2400) : ch;
+        }
+        return new string(result);
+    }
 }
 
 /// <summary>
