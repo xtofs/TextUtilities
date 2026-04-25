@@ -53,4 +53,13 @@ jobs:
           fi
 
       - name: Publish to NuGet.org
+      - name: Ensure nuget.org uses v3 endpoint
+        run: |
+          dotnet nuget remove source nuget.org || true
+          dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
+
+      - name: List NuGet sources (debug)
+        run: dotnet nuget list source
+
+      - name: Publish to NuGet.org
         run: dotnet nuget push "artifacts/packages/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
